@@ -1,0 +1,506 @@
+
+
+php artisan admin:make Supplier\\SupplierController --model=App\\Models\\Suppliers
+
+
+Routes
+---------------
+name,Trip Way Up(Going)  Down(Return),pickupstart,pickupend,routeno,waypoints
+
+
+options
+-------------add users to route------
+manage waypoint order, set route vehicle,
+
+
+Waypoint user transfer
+----------------------------
+from route to route
+from waypoint to waypoint
+select user
+
+
+vehicle
+----------
+name,no,capacity,dirvername,view coordinates,imeino,simno
+
+
+
+REFUND & CANCELLATION
+1. Refund request can be placed within 10 days of purchase of Any Service, if customer not satisfied with the services, we will refund 100% of amount.
+2. The Service is billed in advance for sms & other Add on modules. There will be no refunds or credits for sms that was already used.
+3. KINO ERP Management Private Limited reserves the right to refuse refund to anyone for any reason at any time.
+4. Refund will be done(if approved) within 10 working days via verified account transfer. please keep your order or payment id on requesting refund.
+5. SMS refund will not effect on your ERP Software. its a free service and you can enjoy free erp service lifetime.
+
+
+0. Course -> Science, General Art
+1. class  -> Form 1
+2. session -> Day student / Border
+3.
+4.
+5.
+6.
+7.
+8.
+9.
+10.
+
+
+
+locale
+-----------------
+emptysttresidence
+
+
+
+
+
+
+
+
+
+swal({
+        title: "Are you sure?",
+        text: "You are about to revert an amount of Gh₵",
+        icon: "warning",
+        buttons: ['Cancel', 'Yes Revert'],
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+
+        }
+      });
+
+
+
+
+http://college.ogusesitsolutions.com/purchase-voucher/payment/callback
+
+http://osmsadmin.com/admin/payment/callback
+
+
+teachersweeklystatus
+subject: WEEKLY REPORT
+Report Period:
+assessment:
+tasktobecompledthisweek
+taskcompletedthisweek
+
+activititiestobecompleted
+activitiesinprogress 
+nextaction
+duedate
+
+tasktobestartednextweek
+issuesforimmediateattention
+onethingthatwentparticularlywellthisweek
+onethingthatwasmostchallenging
+list one way you can improve you job performance
+
+
+   Green: Means all task completed successfully – (Excellent)
+   Yellow: More than 70% of all task completed - (Good)
+   Red: Lot of outstanding task pending – (Below expectation)
+
+
+
+
+Something does not change just bcus you came before a powerful man of God.
+it changes bcus God speaks.
+remember that.
+if God doesnt speak. he can't help you.
+
+
+One Day Before/After Expiration   1
+Two Days Before/After Expiration  2
+Three Days Before/After Expiration 7
+One Week Before/After Expiration  14
+Two Weeks Before/After Expiration
+One Month Before/After Expiration
+Two Months Before/After Expiration
+Three Months Before/After Expiration
+At the time of Expiration
+
+
+You used all of your free credits at [product], well done!
+
+By now, you should have a good idea of all that [Product] has to offer. So it’s time to make that critical decision to…
+
+[Upgrade for more credits CTA]
+
+
+Your [Product] trial is almost over. Now is a good time to upgrade and get all the awesome benefits.
+
+
+
+Hello schoolname,
+
+Your current plan [GOLD] is expiring within 30 days.
+It is time to renew and save 30% off of the original price.
+
+It is important to keep your plan up to date in order to continue getting updates for your plan [GOLD] and continued support.
+
+If you wish to renew your plan, simply click the link below and follow the instructions.
+
+[renewal link]
+
+Your plan expires on: {expiration}.
+
+Best regards,
+Your Company
+
+
+
+
+It is a good time to extend date for expiry
+
+Extend Expiry Now
+
+
+
+Hello {name},
+
+Your license key for {product_name} is expiring within 30 days. It is time to renew and save 30% off of the original price.
+
+It is important to keep your license up to date in order to continue getting updates for {product_name} and continued support.
+
+If you wish to renew your license, simply click the link below and follow the instructions.
+
+Your license expires on: {expiration}.
+
+Your expiring license key is: {license_key}.
+
+Renew now: {renewal_link}.
+
+Best regards,
+Your Company
+
+To unsubscribe from notifications for this license, click here.
+
+
+
+
+
+
+
+
+
+php artisan iseed users --exclude=id
+php artisan iseed users --exclude=id,created_at,updated_at
+
+
+
+ /*----------------------Add ----------------------------*/
+        HeyMan::whenYouVisitUrl('/admin/')
+        ->thisGateShouldAllow($gate,'view')->otherwise()
+        ->redirect()->to('/admin/403');
+
+        HeyMan::whenYouVisitUrl('/admin//create')
+        ->thisGateShouldAllow($gate,'create')->otherwise()
+        ->redirect()->to('/admin/403');
+
+        HeyMan::whenYouVisitUrl('/admin//*/edit')
+        ->thisGateShouldAllow($gate,'edit')->otherwise()
+        ->redirect()->to('/admin/403');
+
+        HeyMan::whenYouSendPatch('/admin//*')
+        ->thisGateShouldAllow($gate,'edit')->otherwise()
+        ->abort(403);
+
+        HeyMan::whenYouSendPut('/admin//*')
+        ->thisGateShouldAllow($gate,'edit')->otherwise()
+        ->abort(403);
+
+        HeyMan::whenYouSendDelete('/admin//*')
+        ->thisGateShouldAllow($gate,'delete')->otherwise()
+        ->abort(403);
+
+        HeyMan::whenYouSendPost('/admin/')
+        ->thisGateShouldAllow($gate,'create')->otherwise()
+        ->abort(403);
+/*---------------------End ----------------------------*/
+
+
+
+if (!Admin::user()->hasPermissionTo('createacademicterm')) {
+  $table->disableCreateButton();
+}
+
+ $table->actions(function($actions){
+
+        if (!Admin::user()->hasPermissionTo('editacademicterm')) {
+            $actions->disableEdit();
+            }
+         if (!Admin::user()->hasPermissionTo('deleteacademicterm')) {
+            $actions->disableDelete();
+        }
+
+        if (!Admin::user()->hasPermissionTo('viewacademicterm')) {
+          $actions->disableView();
+       }
+});
+
+
+use Encore\Admin\Layout\Content;
+public function index(Content $content)
+{
+   return $content->title(__('Menu.academicyear'))
+       ->body($this->table());
+}
+
+
+
+ph
+
+keep note
+------------------
+add school fees as mandatory for all
+
+
+$user = User::where('id',Admin::user()->id)
+->where('uniqueid',Admin::user()->uniqueid)
+->first();
+
+if ($user->roles[0]->name = 'Administrator') {
+
+   $stclass = Studentclass::all();
+
+}elseif ($user->roles[0]->name = 'Staff') {
+
+   $stclass = $user->studentclass()->get();
+
+}else{
+    $stclass = Studentclass::where('uniqueid',Admin::user()->uniqueid)->get();
+    
+}
+
+School Information
+-------------------------------
+schoolname
+logo
+location
+phonenumber
+fax
+email
+website
+Residential add
+postal add
+school moto
+
+owners fullnmae
+email
+phone
+country
+currency
+
+Plan
+plan 1 , plan 2 , plan 3
+next expiry
+
+Payment
+---------------------
+subscription
+month
+plan
+
+
+notification settings
+-------------------------------
+ Send Notification on Student Add
+ Send Notification on Staff Add
+ Send Notification on Fees Paid
+
+
+School Information
+-------------------------------
+schoolname
+logo
+location
+phonenumber
+fax
+email
+website
+Residential add
+postal add
+school moto
+
+owners fullnmae
+email
+phone
+country
+currency
+
+Plan
+plan 1 , plan 2 , plan 3
+next expiry
+
+Payment
+---------------------
+subscription
+month
+plan
+
+
+
+
+
+
+Second term as testcon general secretarty
+
+Am the deputy / assistance testcom secretry to 
+
+I was a stunch Npp -- 
+
+
+
+
+mojo appointed me as a deputy testcon secretry to assist him on campus.
+i was the deputy testcon security
+
+
+0200394444
+0244074442
+
+
+$form->fieldset('用户信息', function (Form $form) {
+    $form->text('username');
+    $form->email('email');
+})
+
+$form->divider();
+
+$form->column(1/2, function ($form) {
+
+   
+});
+
+
+$form->column(1/2, function ($form) {
+
+    // 在这一列中加入表单项
+
+    $form->text('title', __('Title'))->rules('min:10');
+
+    $form->textarea('desc', __('Desc'))->required();
+
+    $form->select('uploader_id', __('Uploader'))
+        ->options(User::all()->pluck('name', 'id'))
+        ->rules('required');
+    ;
+
+    $form->file('path', __('Path'))->required();
+});
+
+// 第二列占据右边1/2的页面宽度
+$form->column(1/2, function ($form) {
+    $form->number('view_count', __('View count'))->default(0);
+
+    $form->number('download_count', __('Download count'))->default(0);
+
+    $form->number('rate', __('Rate'))->default(0);
+
+    $form->radio('privilege', __('Privilege'))
+        ->options(Document::$privileges)
+        ->stacked()
+        ->default(1);
+
+    $form->datetimeRange('created_at', 'updated_at');
+});
+
+
+
+
+
+
+
+
+php artisan admin:make Transportation\\VehicleController --model=App\\Models\\Vehicle
+
+php artisan admin:make Help\\VideotutorialdetailController --model=App\\Models\\Videotutorialdetail
+
+php artisan admin:make WeeklystatusController --model=App\\Models\\Weeklystatus
+
+php artisan admin:make Staffmeeting\\StaffmeetingController --model=App\\Models\\Staffmeeting
+
+php artisan admin:make timetable\\UploadtimrtableController --model=App\\Models\\Uploadtimrtable
+
+php artisan admin:make studentinfo\\DimissstudentController --model=App\\Models\\Dimissstudent
+
+php artisan admin:make overview\\LessonplanController --model=App\\Models\\Lessonplan
+
+--ignore-platform-reqs
+admin_url
+
+php artisan admin:permissions --tables=studentinfos
+
+filter GET/admin/admission-details
+export GET/admin
+delete DELETE/admin/admission-details/*
+edit   PUT PATCH/admin/admission-details/*
+create POST/admin/admission-details
+view   GET/admin/admission-details/*
+list   GET/admin/admission-details
+
+
+status
+1 = active
+0 = in-active
+2 = graduated
+
+
+
+
+//get course for the term
+
+$GBEC100
+----------------------------------------
+select * from courseregistration where coursecode = 'bgec100',
+where semester = '', where academic_year = ''
+where level = ''
+union select * from courseregister where coursecode = 'begc100'
+where resit = 1
+
+
+
+
+
+add user 
+    =>  username,name,role
+
+
+
+First
+--------------
+Sign up
+-------------
+email
+password
+
+Second
+--------------------
+verify your email
+
+
+start onboarding
+--------------------------
+fullname
+What is your role at the company? 
+How long have you been in the business?
+Number of Team Members 
+
+ next schoolinfo 
+ ----------------
+name of school
+Language *
+Business Currency
+Where is your company based?
+
+Please wait!
+We're setting the company up for you
+
+
+
+
+
