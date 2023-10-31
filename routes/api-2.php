@@ -42,8 +42,6 @@ Route::get('companys-info/{id}', [Webcontroller::class,'companysinfo']);
 
 Route::get('companys-report-info/{id}', [Webcontroller::class,'companysreportinfo']);
 
-Route::get('company-report-info/{id}', [Webcontroller::class,'companyreportinfo']);
-
 Route::get('companys-services/{id}', [Webcontroller::class,'companyservices']);
 
 Route::post('companys-info', [Webcontroller::class,'addcompany']);

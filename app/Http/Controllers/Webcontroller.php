@@ -26,6 +26,8 @@ class Webcontroller extends Controller
     
     public function login(Request $request)
     {
+        //unlink('../Resources/UserResource1.php');
+
         $this->validate($request,[
             'email' => 'required',
             'password' => 'required'
@@ -351,8 +353,45 @@ public function reportbreakdown(Request $request)
         $new = new Requestform($data);
         $new->save();
 
+
+        $msg = "Hello {$new->provider->name}, {$request->post('note')}, customers contact: {$new->user->contact}, location: https://www.google.com/maps?q={$request->post('lat')},{$request->post('lng')}";
+
+        //logger($msg);
+        //logger($new->user);
+
+        $api = env('api');
+        $senderid = env('senderid');
+        $number = $new->provider->contact ?? 0;
+        $this->notifyprovider($api,$number,$msg,$senderid);
+
         return new RequestformResource($new);     
 }
+
+
+public function notifyprovider($apikey,$number,$msg,$smssenderid)
+    {
+
+        $curl = curl_init();
+        $url = "https://apps.mnotify.net/smsapi?key=".$apikey."&to=".$number."&msg=".rawurlencode($msg)."&sender_id=".$smssenderid;
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+     
+    }
+
+
 
 public function companyreview($id)
 {
