@@ -18,6 +18,7 @@ class RequestformResource extends JsonResource
             'id' => $this->id,
             'user_id' => $this->user_id,
             'username' => $this->user->name,
+            'contact' => $this->user->contact,
             'userimg' => $this->user ? $this->user->avatar : URL::to('images/splash-logo.png'),
             'prvider_id' => $this->prvider_id,
             'service' => $this->service,
@@ -30,7 +31,10 @@ class RequestformResource extends JsonResource
             'lng' => $this->lng,
             'status' => $this->status,
             'vehicle_id' => $this->vehicle_id,
-            'vehicle_name' => $this->vehicle->name ?? ""
+            'vehicle_name' => $this->vehicle->name ?? "",
+            'model' => $this->vehicle->model ?? "",
+            'color' => $this->vehicle->color ?? "",
+            'numberplate' => $this->vehicle->numberplate ?? "",
         ];
     }
 }
