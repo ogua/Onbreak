@@ -24,7 +24,7 @@ Route::post('user-login', [Webcontroller::class,'login']);
 
 Route::get('all-user', [Webcontroller::class,'alluser']);
 
-// Route::get('user/{id}', [Webcontroller::class,'userinfo']);
+Route::get('user/{id}', [Webcontroller::class,'userinfo']);
 
 Route::post('update-user/{id}', [Webcontroller::class,'updateuser']);
 
